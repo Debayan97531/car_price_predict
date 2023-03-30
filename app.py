@@ -1,4 +1,9 @@
-from flask import Flask,render_template,request
+
+# file="LinearRegressionModel.pkl"
+# fileobj=open(file,'rb')
+# model=pickle.load(fileobj)
+
+from flask import Flask,render_template,request,redirect
 from flask_cors import CORS,cross_origin
 import pickle
 import pandas as pd
@@ -6,9 +11,6 @@ import numpy as np
 
 app=Flask(__name__)
 cors=CORS(app)
-# file="LinearRegressionModel.pkl"
-# fileobj=open(file,'rb')
-# model=pickle.load(fileobj)
 model=pickle.load(open('LinearRegressionModel.pkl','rb'))
 car=pd.read_csv('Cleaned_Car_data.csv')
 
@@ -39,6 +41,7 @@ def predict():
     print(prediction)
 
     return str(np.round(prediction[0],2))
+
 
 
 if __name__=='__main__':

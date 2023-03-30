@@ -35,9 +35,9 @@
                         <label><b>Select the company:</b> </label><br>
                         <select class="selectpicker form-control" id="company" name="company" required="1"
                                 onchange="load_car_models(this.id,'car_models')">
-                            { % for company in companies % }
+                            {% for company in companies %}
                             <option value="{{ company }}">{{ company }}</option>
-                            { % endfor % }
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="col-md-10 form-group" style="text-align: center">
@@ -48,17 +48,17 @@
                     <div class="col-md-10 form-group" style="text-align: center">
                         <label><b>Select Year of Purchase:</b> </label><br>
                         <select class="selectpicker form-control" id="year" name="year" required="1">
-                            { % for year in years % }
+                            {% for year in years %}
                             <option value="{{ year }}">{{ year }}</option>
-                            { % endfor % }
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="col-md-10 form-group" style="text-align: center">
                         <label><b>Select the Fuel Type:</b> </label><br>
                         <select class="selectpicker form-control" id="fuel_type" name="fuel_type" required="1">
-                            { % for fuel in fuel_types % }
+                            {% for fuel in fuel_types %}
                             <option value="{{ fuel }}">{{ fuel }}</option>
-                            { % endfor % }
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="col-md-10 form-group" style="text-align: center">
@@ -83,28 +83,28 @@
 
 <script>
 
-  function load_car_models(company_id,car_model_id)
-  {
-      var company=document.getElementById(company_id);
-      var car_model= document.getElementById(car_model_id);
-      console.log(company.value);
-      car_model.value="";
-      car_model.innerHTML="";
-      { % for company in companies % }
-          if( company.value == "{{ company }}")
-          {
-              { % for model in car_models % }
-                  { % if company in model % }
+    function load_car_models(company_id,car_model_id)
+    {
+        var company=document.getElementById(company_id);
+        var car_model= document.getElementById(car_model_id);
+        console.log(company.value);
+        car_model.value="";
+        car_model.innerHTML="";
+        {% for company in companies %}
+            if( company.value == "{{ company }}")
+            {
+                {% for model in car_models %}
+                    {% if company in model %}
 
-                      var newOption= document.createElement("option");
-                      newOption.value="{{ model }}";
-                      newOption.innerHTML="{{ model }}";
-                      car_model.options.add(newOption);
-                  { % endif % }
-              { % endfor % }
-          }
-      { % endfor % }
-  }
+                        var newOption= document.createElement("option");
+                        newOption.value="{{ model }}";
+                        newOption.innerHTML="{{ model }}";
+                        car_model.options.add(newOption);
+                    {% endif %}
+                {% endfor %}
+            }
+        {% endfor %}
+    }
 
     function form_handler(event) {
         event.preventDefault(); // Don't submit the form normally
@@ -131,7 +131,9 @@
         xhr.send(fd);
     }
 </script>
-// jQuery first, then Popper.js, then Bootstrap JS -->
+
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
