@@ -10,7 +10,7 @@ Some packages are:
  - pandas 
  - scikit-learn
  
-  Run the "application.py" file
+  Run the "app.py" file
 And you are good to go. 
 
 ## What this project does?
